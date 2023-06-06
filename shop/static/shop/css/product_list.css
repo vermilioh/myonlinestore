@@ -1,0 +1,141 @@
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+.products-container {
+  width: 100%;
+}
+
+.product-item {
+    background-color: #f5f5f5;
+    padding: 20px;
+    text-align: center;
+}
+
+.product-item h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product-item img {
+    width: 100%;
+    height: auto;
+}
+
+.product-item p {
+    font-size: 18px;
+}
+
+.product-detail {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-detail img {
+    width: 50%;
+    height: auto;
+}
+
+.product-detail-info {
+    width: 45%;
+}
+
+.product-detail-info h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.product-detail-info p {
+    font-size: 18px;
+}
+
+/* Селектор, указывающий на изображение продукта */
+.product-image {
+    width: 200px; /* Измените значение на желаемую ширину изображения */
+    height: auto; /* Устанавливает высоту автоматически на основе ширины, чтобы сохранить соотношение сторон */
+}
+
+/* 1. Стили для баннера */
+.banner {
+  background-image: url('../image/banner-image.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 60px;
+  margin-top: 40px;
+}
+
+.banner h1 {
+  font-size: 100px;
+  color: #ffffff;
+}
+
+/* 2. Стили для отображения товаров */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+}
+
+.product-item {
+  position: relative;
+}
+
+.product-item img {
+  width: 100%;
+  display: block;
+}
+
+.product-item:hover .product-info {
+  display: flex;
+}
+
+.product-info {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8)
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #000000;
+}
+
+.product-item:hover img {
+  opacity: 0.5;
+
+}
+.product-info h2 {
+font-size: 18px;
+margin-bottom: 10px;
+color: #000000;
+}
+
+.product-info span {
+font-size: 16px;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Равномерное распределение категорий */
+  margin-bottom: 20px; /* Отступ снизу */
+}
+
+.categories a {
+  color: #999999; /* Серый цвет текста */
+  font-size: 16px; /* Размер шрифта */
+  text-decoration: none; /* Убираем подчеркивание */
+  margin-bottom: 10px; /* Отступ снизу, если категорий становится много и они переходят на новую строку */
+}
+

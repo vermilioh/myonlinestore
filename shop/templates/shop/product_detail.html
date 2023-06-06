@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'shop/css/product_detail.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <a class="back-to-shop" href="{% url 'shop:product_list' %}">&larr; Back to shop</a>
+  <div class="product-detail-container">
+    <div class="product-detail">
+      <div class="product-images">
+        <img src="{{ product.image.url }} " alt="{{ product.name }}" class="main-image">
+        <div class="thumbnails">
+          {% for image in product.images.all %}
+            <img src="{{ image.image.url }}" alt="{{ product.name }}" class="thumbnail">
+          {% endfor %}
+        </div>
+      </div>
+      <div class="product-info">
+        <form id="add-to-cart-form" data-product-id="{{ product.id }}">
+          {% csrf_token %}
+          <h1>{{ product.name }}</h1>
+          <p>${{ product.price }}</p>
+          <p>{{ product.description }}</p>
+          <div class="quantity">
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" min="1" max="99" value="1">
+          </div>
+          <button type="submit" class="add-to-cart" data-product-id="{{ product.id }}">Add to cart</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const mainImage = document.querySelector(".main-image");
+    const thumbnails = document.querySelectorAll(".thumbnail");
+
+    thumbnails.forEach((thumbnail) => {
+      thumbnail.addEventListener("click", function () {
+        mainImage.src = this.src;
+      });
+    });
+  });
+</script>
+{% endblock %}
+
+
+
+
+
+
