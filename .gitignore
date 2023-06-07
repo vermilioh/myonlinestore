@@ -1,0 +1,30 @@
+# python and django related
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+*.log
+*.pot
+*.egg-info/
+dist/
+build/
+mypythonenv/
+db.sqlite3
+media
+
+# development environment related
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*.bak
+
+# environment variables
+.env
+
+# OS related
+.DS_Store
+Thumbs.db
+
+client_secret.json

@@ -1,0 +1,85 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <title>{% block title %}My Online Store{% endblock %}</title>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'core/images/logo1.png' %}" alt="Logo">
+        </a>
+        <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'shop:product_list' %}">Shop</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}" title="{{ user.username }} " class="logout-link">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+        </nav>
+
+     <div class="cart">
+        <a href="{% url 'cart:cart_detail' %}">
+            <img src="{% static 'core/images/cart-icon.png' %}" alt="Cart" class="cart-icon">
+        </a>
+        <span class="cart-counter" id="cart-counter">0</span>
+    </div>
+
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer>
+        <p>All artworks (c) Alaya Ptichka</p>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/vermiliooh" target="_blank"><img class="social-icon" src="{% static 'core/images/instagram-icon.png' %}" alt="Instagram"> </a>
+            <a href="https://www.pinterest.com/alenaklinkova3" target="_blank"><img class="social-icon" src="{% static 'core/images/pinterest-icon.png' %}" alt="Pinterest"></a>
+            <a href="https://t.me/vermilioh" target="_blank" ><img class="social-icon" src="{% static 'core/images/telegram-icon.png' %}" alt="Telegram"></a>
+            <a href="https://www.behance.net/vermilioh" target="_blank"><img class="social-icon" src="{% static 'core/images/behance-icon.png' %}" alt="Behance"></a>
+        </div>
+
+    </footer>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script>
+      function updateCartCounter() {
+        $.ajax({
+          url: '{% url "cart:cart_items_count" %}',
+          dataType: 'json',
+          success: function (data) {
+            $('.cart-counter').text(data.cart_total_items);
+          }
+        });
+      }
+
+      $(document).ready(function () {
+        updateCartCounter();
+        $('.add-to-cart').on('click', function (event) {
+          event.preventDefault();
+          const form = $(this).closest('form');
+          $.ajax({
+            url: form.attr('action'),
+            method: 'POST',
+            data: form.serialize(),
+            success: function () {
+              updateCartCounter();
+            }
+          });
+        });
+      });
+    </script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>
+</html>
+

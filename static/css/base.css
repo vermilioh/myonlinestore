@@ -1,0 +1,139 @@
+/* Общие стили */
+body {
+    font-family: "Helvetica", sans-serif;
+    color: #333;
+    margin: 0;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 0 70px; /* Отступы слева и справа равны 50px */
+    display: flex;
+}
+
+
+
+/* Шапка */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    margin-top: 20px; /* новое свойство */
+}
+
+nav {
+    flex-grow: 0.5; /* Добавлено */
+    /*display: flex; /* Добавлено */
+    justify-content: space-between; /* Добавлено */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-grow: 0.8;
+}
+
+nav ul li {
+    margin-right: 0px;
+    flex-grow: 1; /* Добавлено */
+    text-align: center; /* Добавлено */
+}
+
+nav ul li a {
+    color: #bfbfbf;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 5px 10px; /* добавьте это свойство для изменения размера кнопок по размеру текста */
+    display: inline-block;
+}
+
+nav ul li a:hover {
+    color: #333;
+}
+
+/* Футер */
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    margin-top: auto; /* новое свойство */
+}
+
+.footer-text {
+    font-weight: 300;
+}
+
+.footer-social {
+    display: flex;
+}
+
+.footer-social a {
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+footer p {
+    color: #bfbfbf; /* добавьте это свойство, чтобы изменить цвет текста */
+}
+
+.cart {
+    margin-right: 20px; /* добавьте это свойство, чтобы сдвинуть корзину левее */
+}
+
+
+.cart img {
+    width: 32px;
+    height: auto;
+}
+
+
+/* Иконки социальных сетей */
+.social-icons {
+    display: flex;
+}
+
+.social-icon {
+    width: 24px;
+    height: auto;
+    margin-right: 10px;
+    fill: #ff1261;
+}
+
+
+
+.cart-counter {
+    position: absolute;
+    background-color: #bfbfbf; /* Изменено с red на #bfbfbf */
+    color: #fff;
+    border-radius: 50%;
+    font-size: 10px;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    line-height: 16px;
+}
+
+/* Добавьте этот класс для стилизации ссылки выхода */
+.logout-link {
+    color: #708B75; /* Пепельно-зеленый цвет */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Добавьте это правило для изменения цвета ссылки при наведении на нее */
+.logout-link:hover {
+    color: #506955; /* Темнее пепельно-зеленого цвета при наведении */
+}
+
+
+main {
+    flex: 1;
+    margin-top: 20px; /* новое свойство */
+    margin-bottom: 20px; /* новое свойство */
+}
+
+

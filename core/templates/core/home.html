@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Home - My Online Store
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="grid-container">
+    <!-- Add your images here -->
+    <img src="{% static 'core/images/image2.jpg' %}" alt="Image 2">
+    <img src="{% static 'core/images/image1.jpg' %}" alt="Image 1">
+    <img src="{% static 'core/images/image3.jpg' %}" alt="Image 3">
+    <img src="{% static 'core/images/image4.jpg' %}" alt="Image 4">
+    <!-- ... -->
+</div>
+{% endblock %}
+
+
+
+

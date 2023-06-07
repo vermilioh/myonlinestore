@@ -1,0 +1,17 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    margin-top: 30px; /* Добавлено */
+}
+
+.grid-container img {
+    width: 100%;
+    height: auto;
+}
+
+/* Стили корзины */
+.cart-icon {
+    position: relative;
+}
+

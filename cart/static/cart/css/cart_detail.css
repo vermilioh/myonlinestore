@@ -1,0 +1,144 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.cart-table th,
+.cart-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.cart-total {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.checkout-button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.checkout-button:hover {
+    background-color: #080809; /* Измените на нужный оттенок серого при наведении */
+}
+/* Стили для корзины */
+.cart {
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+}
+
+.cart .product {
+    display: flex;
+    align-items: center;
+}
+
+.cart .product img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.cart .product .name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.cart .quantity {
+    font-size: 16px;
+    color: #777;
+}
+
+.cart .price {
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+}
+
+.cart .remove {
+    color: #f00;
+    cursor: pointer;
+}
+
+.cart-table th.product-remove,
+.cart-table td.product-remove {
+  text-align: center;
+  width: 40px;
+}
+
+.remove-item {
+    text-decoration: none;
+    font-size: 24px;
+    color: grey;
+}
+
+.cart-table th, .cart-table td {
+    border: none;
+    padding: 10px;
+    text-align: left;
+}
+
+.cart-table tr {
+    margin-bottom: 10px; /* Измените значение, чтобы подогнать под нужный отступ */
+}
+
+.cart-table th {
+    background-color: #ddd; /* Измените на нужный цвет */
+}
+
+.btn {
+    background-color: lightgray; /* Измените на нужный оттенок серого */
+    color: black; /* Измените на нужный цвет текста */
+    text-decoration: none; /* Убирает подчеркивание */
+    border: none;
+    padding: 10px 20px; /* Измените на нужные размеры */
+    cursor: pointer;
+    display: inline-block;
+    transition: all 0.3s ease 0s;
+}
+
+.btn:hover {
+    background-color: darkgray; /* Измените на нужный оттенок серого при наведении */
+}
+
+.quantity-input {
+    width: 50px; /* Вы можете изменить ширину в зависимости от ваших предпочтений */
+    height: 20px; /* Вы можете изменить высоту в зависимости от ваших предпочтений */
+    border: 2px solid #ccc; /* Вы можете изменить цвет границы в зависимости от ваших предпочтений */
+    border-radius: 5px; /* Вы можете изменить радиус границы в зависимости от ваших предпочтений */
+    padding: 5px;
+    text-align: center;
+    font-size: 16px; /* Вы можете изменить размер шрифта в зависимости от ваших предпочтений */
+    color: #333; /* Вы можете изменить цвет текста в зависимости от ваших предпочтений */
+    background-color: #f5f5f5; /* Вы можете изменить цвет фона в зависимости от ваших предпочтений */
+}
+
+.quantity-input:focus {
+    border-color: #9ecaed; /* Вы можете изменить цвет границы при фокусе в зависимости от ваших предпочтений */
+    box-shadow: 0 0 10px #9ecaed; /* Вы можете изменить тень при фокусе в зависимости от ваших предпочтений */
+}
+
