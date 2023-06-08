@@ -112,5 +112,6 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 SITE_ID = 1
