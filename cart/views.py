@@ -37,7 +37,7 @@ def cart_items_count(request):
 
 
 def get_google_auth_credentials():
-    CLIENT_SECRETS_FILE = "client_secret.json"
+    CLIENT_SECRETS_FILE = os.path.join(BASE_DIR, 'client_secret.json')
     SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 
     creds = None
