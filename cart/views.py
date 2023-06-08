@@ -16,8 +16,6 @@ import os.path
 import base64
 from email.mime.text import MIMEText
 from google.oauth2.service_account import Credentials
-from django.core.mail import send_mail
-
 
 def add_to_cart(request, product_id):
     cart = Cart(request)
@@ -38,20 +36,41 @@ def cart_items_count(request):
     return JsonResponse({'cart_total_items': total_items})
 
 
-def get_google_auth_credentials():
+def get_google_auth_credentials_from_service_account():
     creds = Credentials.from_service_account_file(os.path.join(settings.BASE_DIR, 'alayaptichkastore-20b2e4a72bf1.json'))
     return creds
 
 
+def get_google_auth_credentials_from_pickle():
+    creds = None
+    if os.path.exists('token.pickle'):
+        with open('token.pickle', 'rb') as token:
+            creds = pickle.load(token)
+
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRETS_FILE, SCOPES)
+            creds = flow.run_local_server(port=8081)
+
+        # Save the credentials for the next run
+        with open('token.pickle', 'wb') as token:
+            pickle.dump(creds, token)
+
+    return creds
+
+
 def send_mail_with_gmail(sender, to, subject, message_text):
-    creds = get_google_auth_credentials()
+    creds = get_google_auth_credentials_from_service_account()
     service = build('gmail', 'v1', credentials=creds)
     message = MIMEText(message_text)
     message['to'] = to
     message['from'] = sender
     message['subject'] = subject
     raw_message = base64.urlsafe_b64encode(message.as_string().encode("utf-8"))
-    return service.users().messages().send(userId=sender, body={"raw": raw_message.decode("utf-8")}).execute()
+    return service.users().messages().send(userId="me", body={"raw": raw_message.decode("utf-8")}).execute()
 
 
 def checkout(request):
@@ -98,7 +117,7 @@ def checkout(request):
                 # email sending
                 try:
                     send_mail_with_gmail(
-                        'vermilion296@gmail.com',
+                        'alaya-ptichka@alayaptichkastore.iam.gserviceaccount.com',
                         request.user.email,
                         'Order Confirmation',
                         f'Thank you for your order.\n\nOrder details:\n{order_items_str}\nTotal cost: {total_cost}\n\nWe are processing your order and will email you once your items have been dispatched.\nFor payment, please contact us on Telegram at https://t.me/vermilioh.',
@@ -119,7 +138,8 @@ def checkout(request):
 
 
 def confirmation(request):
-    return render(request, 'cart/confirmation.html')
+    last_order = Order.objects.filter(user=request.user).last()
+    return render(request, 'cart/confirmation.html', {'order': last_order})
 
 
 def remove_from_cart(request, product_id):
@@ -136,10 +156,6 @@ def update_cart(request, product_id):
     cart.update(product, quantity)
     return JsonResponse({"status": "ok"})
 
-
-def confirmation(request):
-    last_order = Order.objects.filter(user=request.user).last()
-    return render(request, 'cart/confirmation.html', {'order': last_order})
 
 
 
