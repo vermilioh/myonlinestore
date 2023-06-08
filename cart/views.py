@@ -42,25 +42,6 @@ def get_google_auth_credentials():
     creds = Credentials.from_service_account_file(os.path.join(settings.BASE_DIR, 'alayaptichkastore-20b2e4a72bf1.json'))
     return creds
 
-    creds = None
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
-            creds = pickle.load(token)
-
-    # If there are no (valid) credentials available, let the user log in.
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRETS_FILE, SCOPES)
-            creds = flow.run_local_server(port=8081)
-
-        # Save the credentials for the next run
-        with open('token.pickle', 'wb') as token:
-            pickle.dump(creds, token)
-
-    return creds
-
 
 def send_mail_with_gmail(sender, to, subject, message_text):
     creds = get_google_auth_credentials()
@@ -70,7 +51,7 @@ def send_mail_with_gmail(sender, to, subject, message_text):
     message['from'] = sender
     message['subject'] = subject
     raw_message = base64.urlsafe_b64encode(message.as_string().encode("utf-8"))
-    return service.users().messages().send(userId="me", body={"raw": raw_message.decode("utf-8")}).execute()
+    return service.users().messages().send(userId=sender, body={"raw": raw_message.decode("utf-8")}).execute()
 
 
 def checkout(request):
