@@ -15,6 +15,7 @@ import pickle
 import os.path
 import base64
 from email.mime.text import MIMEText
+from google.oauth2.service_account import Credentials
 from django.core.mail import send_mail
 
 
@@ -38,8 +39,8 @@ def cart_items_count(request):
 
 
 def get_google_auth_credentials():
-    CLIENT_SECRETS_FILE = os.path.join(settings.BASE_DIR, 'client_secret.json')
-    SCOPES = ['https://www.googleapis.com/auth/gmail.send']
+    creds = Credentials.from_service_account_file('/path/to/your/service-account-file.json')
+    return creds
 
     creds = None
     if os.path.exists('token.pickle'):
