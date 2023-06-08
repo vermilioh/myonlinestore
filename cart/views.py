@@ -1,5 +1,7 @@
 from django.shortcuts import redirect, get_object_or_404, render
 from django.conf import settings
+from google.oauth2.gdch_credentials import ServiceAccountCredentials
+
 from shop.models import Product
 from .cart import Cart
 from .models import CartItem
@@ -62,15 +64,55 @@ def get_google_auth_credentials_from_pickle():
     return creds
 
 
+from google.oauth2.service_account import Credentials
+
+
+def get_google_auth_credentials():
+    SERVICE_ACCOUNT_FILE = os.path.join(settings.BASE_DIR, 'alayaptichkastore-20b2e4a72bf1.json')
+    SCOPES = ['https://www.googleapis.com/auth/gmail.send']
+
+    creds = None
+    if os.path.exists(SERVICE_ACCOUNT_FILE):
+        creds = Credentials.from_service_account_file(
+            SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            creds = ServiceAccountCredentials.from_json_keyfile_name(
+                SERVICE_ACCOUNT_FILE, SCOPES)
+    return creds
+
+
 def send_mail_with_gmail(sender, to, subject, message_text):
-    creds = get_google_auth_credentials_from_service_account()
+    creds = get_google_auth_credentials()
     service = build('gmail', 'v1', credentials=creds)
     message = MIMEText(message_text)
     message['to'] = to
     message['from'] = sender
     message['subject'] = subject
     raw_message = base64.urlsafe_b64encode(message.as_string().encode("utf-8"))
-    return service.users().messages().send(userId="me", body={"raw": raw_message.decode("utf-8")}).execute()
+    try:
+        service.users().messages().send(userId="me", body={"raw": raw_message.decode("utf-8")}).execute()
+    except HttpError as error:
+        print(f'An error occurred while trying to send the email: {error}')
+        if error.resp.status == 400:
+            print("400 Error: Bad Request. The request was not understood by the server, please ensure you are formatting the request correctly.")
+        elif error.resp.status == 401:
+            print("401 Error: Unauthorized. Please ensure your credentials are correct and you have permission to perform this operation.")
+        elif error.resp.status == 403:
+            print("403 Error: Forbidden. The request was understood by the server but it is refusing to complete it. This is often due to insufficient access to the resource being modified.")
+        elif error.resp.status == 404:
+            print("404 Error: Not Found. The server could not find the requested resource.")
+        elif error.resp.status == 429:
+            print("429 Error: Too many requests. You have been temporarily banned for sending too many requests.")
+        elif error.resp.status == 500:
+            print("500 Error: Internal Server Error. An error occurred on the server.")
+        else:
+            print(f"An unexpected error {error.resp.status} occurred: {error.resp.reason}")
+
+
 
 
 def checkout(request):
