@@ -77,11 +77,8 @@ def get_google_auth_credentials():
             SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 
     if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            creds = ServiceAccountCredentials.from_json_keyfile_name(
-                SERVICE_ACCOUNT_FILE, SCOPES)
+        raise Exception("Cannot obtain valid Google credentials")
+
     return creds
 
 
