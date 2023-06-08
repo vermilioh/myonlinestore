@@ -39,7 +39,7 @@ def cart_items_count(request):
 
 
 def get_google_auth_credentials():
-    creds = Credentials.from_service_account_file(os.path.join(BASE_DIR, 'your-service-account-file.json'))
+    creds = Credentials.from_service_account_file(os.path.join(settings.BASE_DIR, 'your-service-account-file.json'))
     return creds
 
     creds = None
