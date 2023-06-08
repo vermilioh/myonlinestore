@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, get_object_or_404, render
+from django.conf import settings
 from shop.models import Product
 from .cart import Cart
 from .models import CartItem
@@ -37,7 +38,7 @@ def cart_items_count(request):
 
 
 def get_google_auth_credentials():
-    CLIENT_SECRETS_FILE = os.path.join(BASE_DIR, 'client_secret.json')
+    CLIENT_SECRETS_FILE = os.path.join(settings.BASE_DIR, 'client_secret.json')
     SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 
     creds = None
