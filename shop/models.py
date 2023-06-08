@@ -41,7 +41,7 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         if self.category:
-            self.image.field.upload_to = f'media/products/{self.category.name}/%Y/%m/%d'
+            self.image.field.upload_to = f'products/{self.category.name}/%Y/%m/%d'
         super().save(*args, **kwargs)
 
 
