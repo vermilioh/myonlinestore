@@ -59,7 +59,7 @@
 
 /* 1. Стили для баннера */
 .banner {
-  background-image: url('../image/banner-image.jpg');
+  background-image: url('../image/banner-image.png');
   background-size: cover;
   background-position: center;
   height: 250px;
