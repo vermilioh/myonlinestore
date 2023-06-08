@@ -18,6 +18,7 @@ import os.path
 import base64
 from email.mime.text import MIMEText
 from google.oauth2.service_account import Credentials
+import os
 
 def add_to_cart(request, product_id):
     cart = Cart(request)
@@ -64,22 +65,26 @@ def get_google_auth_credentials_from_pickle():
     return creds
 
 
-from google.oauth2.service_account import Credentials
 
 
 def get_google_auth_credentials():
-    SERVICE_ACCOUNT_FILE = os.path.join(settings.BASE_DIR, 'alayaptichkastore-20b2e4a72bf1.json')
+    creds = None
+    SERVICE_ACCOUNT_FILE = "/home/vermilioh/myonlinestore/alayaptichkastore-20b2e4a72bf1.json"
     SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 
-    creds = None
     if os.path.exists(SERVICE_ACCOUNT_FILE):
         creds = Credentials.from_service_account_file(
-            SERVICE_ACCOUNT_FILE, scopes=SCOPES)
-
+            SERVICE_ACCOUNT_FILE,
+            scopes=SCOPES
+        )
     if not creds or not creds.valid:
-        raise Exception("Cannot obtain valid Google credentials")
-
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            raise Exception("Cannot obtain valid Google credentials")
     return creds
+
+
 
 
 def send_mail_with_gmail(sender, to, subject, message_text):
