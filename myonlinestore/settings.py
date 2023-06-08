@@ -115,3 +115,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 SITE_ID = 1
+
+CART_SESSION_ID = 'cart'
