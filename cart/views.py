@@ -81,8 +81,6 @@ def send_mail_with_gmail(sender, to, subject, message_text):
     return service.users().messages().send(userId=sender, body={"raw": raw_message.decode("utf-8")}).execute()
 
 
-
-
 def checkout(request):
     print(f"Checkout function called. Method: {request.method}")  # Debug line
     cart = Cart(request)
