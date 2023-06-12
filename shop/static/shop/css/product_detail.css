@@ -99,6 +99,23 @@
   flex-direction: column;
 }
 
+.product-card {
+    color: #777; /* Делаем текст серым */
+    display: flex;
+    flex-direction: column; /* Располагаем элементы вертикально */
+    justify-content: space-around; /* Распределяем элементы равномерно по всей карточке */
+}
+
+.product-card img {
+    object-fit: cover; /* Гарантируем, что все изображения будут иметь одинаковый размер */
+}
+
+.product-button {
+    background-color: #999; /* Делаем кнопку серой */
+    color: white; /* Делаем текст на кнопке белым */
+}
+
+
 
 
 
