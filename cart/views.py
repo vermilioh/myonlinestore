@@ -66,34 +66,18 @@ def get_google_auth_credentials_from_pickle():
 
 
 def get_google_auth_credentials():
-    creds = None
-    SERVICE_ACCOUNT_FILE = "/home/vermilioh/myonlinestore/alayaptichkastore-20b2e4a72bf1.json"
+    SERVICE_ACCOUNT_FILE = os.path.join(settings.BASE_DIR, 'alayaptichkastore-20b2e4a72bf1.json')
     SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 
+    creds = None
     if os.path.exists(SERVICE_ACCOUNT_FILE):
-        print("Файл существует")
-        if os.access(SERVICE_ACCOUNT_FILE, os.R_OK):
-            print("Файл доступен для чтения")
-            creds = Credentials.from_service_account_file(
-                SERVICE_ACCOUNT_FILE,
-                scopes=SCOPES
-            )
-        else:
-            print("Файл не доступен для чтения")
-            raise Exception("Файл с учетными данными Google не доступен для чтения")
-    else:
-        print("Файл не найден")
-        raise Exception("Файл с учетными данными Google не найден")
+        creds = Credentials.from_service_account_file(
+            SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 
     if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            raise Exception("Cannot obtain valid Google credentials")
+        raise Exception("Cannot obtain valid Google credentials")
+
     return creds
-
-
-
 
 
 def send_mail_with_gmail(sender, to, subject, message_text):
