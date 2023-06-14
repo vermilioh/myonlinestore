@@ -1,7 +1,7 @@
 # [Online Shop for Artists 🎨](http://vermilioh.pythonanywhere.com/)
 [check](http://vermilioh.pythonanywhere.com/)
 
-![Project Image](github_images/main.jpg)
+![Project Image](https://github.com/vermilioh/myonlinestore/blob/main/github_images/main.JPG)
 
 ## Project Description
 This project is an online portfolio and shop for an artist, built with Django and the Django REST Framework. It showcases the artist's works and provides an e-commerce platform for selling these pieces.
