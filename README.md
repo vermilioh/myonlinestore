@@ -46,9 +46,6 @@ The Django web framework was used extensively throughout this project, and Djang
   </tr>
 {% endfor %}
 ```
-## Code Samples 📄
-
-In this project, I used several technologies, including Django, Django Template Language (DTL), HTML, CSS, JavaScript, and AJAX. Below are a few examples of how I used these technologies in the project.
 
 ### JavaScript & AJAX
 JavaScript, specifically jQuery, was used to add interactivity to the page, and AJAX was used to update the cart contents without reloading the page. Here's a snippet showing the AJAX calls made when the quantity of a product in the cart is updated:
