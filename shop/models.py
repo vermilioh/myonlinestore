@@ -28,6 +28,8 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def get_products(self):
+        return Product.objects.filter(category=self)
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
@@ -51,3 +53,6 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return f"{self.product.name} - Image {self.pk}"
+
+
+

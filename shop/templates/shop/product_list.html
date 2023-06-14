@@ -34,6 +34,27 @@
     {% endfor %}
   </div>
 </div>
+
+{% block extra_js %}
+<script>
+fetch('/shop/products')
+    .then(response => response.json())
+    .then(products => {
+        let productsContainer = document.getElementById('products-container');
+        for (let product of products) {
+            let productDiv = document.createElement('div');
+            let productName = document.createElement('h2');
+            let productImage = document.createElement('img');
+            productName.innerText = product.name;
+            productImage.src = product.image_url;
+            productDiv.appendChild(productImage);
+            productDiv.appendChild(productName);
+            productsContainer.appendChild(productDiv);
+        }
+    });
+</script>
+{% endblock %}
+
 {% endblock %}
 
 
